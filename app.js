@@ -10,7 +10,7 @@ dotenv.config()
 football.setAPIKey(process.env.API_KEY);
 football.setAPIHost(process.env.API_HOST);
 football.setTeamId(4195)
-football.setSeasonYear(2020);
+football.setSeasonYear(Math.floor(Math.random() * (2022 - 2017) + 2017));
 
 // Vonage SDK Setup
 const from = "MaccabiHaifa";
@@ -20,7 +20,6 @@ const vonage = new Vonage({
     apiKey: process.env.VONAGE_KEY,
     apiSecret: process.env.VONAGE_SECRET
 });
-
 // run everyday at 8am
 schedule.scheduleJob('0 8 * * *', async () => {
     const result = await football.getLostMatches();
