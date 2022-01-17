@@ -12,6 +12,8 @@ football.setAPIHost(process.env.API_HOST);
 football.setTeamId(4195)
 football.setSeasonYear(Math.floor(Math.random() * (2022 - 2017) + 2017));
 
+console.log(`Starting aBadMorning with the victim \n number: ${process.env.VICTIM} `)
+
 // Vonage SDK Setup
 const from = "MaccabiHaifa";
 const to = process.env.VICTIM;
