@@ -2,6 +2,8 @@ import dotenv from 'dotenv'
 import { football } from './src/services/football.api.js'
 import messageBuilder from './src/functions/messageBuilder.function.js';
 import Vonage from '@vonage/server-sdk'
+import schedule from 'node-schedule'
+
 dotenv.config()
 
 // Football API Setup
@@ -19,8 +21,8 @@ const vonage = new Vonage({
     apiSecret: process.env.VONAGE_SECRET
 });
 
-// Runtime
-(async () => {
+// run everyday at 8am
+schedule.scheduleJob('0 8 * * *', async () => {
     const result = await football.getLostMatches();
     const randoMatch = result[Math.floor(Math.random() * result.length)];
     const message = messageBuilder(randoMatch, football.getTeamId());
@@ -36,5 +38,4 @@ const vonage = new Vonage({
             }
         }
     });
-
-})()
+})
